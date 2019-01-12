@@ -27,3 +27,9 @@ page {
   margin: 20rpx;
   flex: 0 0 90rpx;/*不放大不缩小保持90rpx*/
 }
+
+/* canvas的样式 */
+.scene-editor-main {
+  width: 100%;
+  height: 100%;
+}

@@ -1,6 +1,8 @@
 <!--pages/scene/scene.wxml-->
 <view class='scene'>
-  <view class='scene-editor'></view>
+  <view class='scene-editor'>
+    <canvas class='scene-editor-main' canvas-id='scene'></canvas><!-- 购买画纸画笔 -->
+  </view>
   <view class='scene-template'></view>
   <button class='scene-download' type='primary'>保存照片</button>
 </view>
