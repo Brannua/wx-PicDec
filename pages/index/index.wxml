@@ -1,0 +1,4 @@
+<view class='page'>
+  <image class="page-bg" src="../../image/bg.png" mode="widthFix"></image>
+  <button class='page-upload' bindtap='uploadPhoto'>上传照片</button>
+</view>

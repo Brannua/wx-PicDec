@@ -1,0 +1,29 @@
+/* pages/scene/scene.wxss */
+page {
+  width: 100%;
+  height: 100%;
+}
+
+.scene {
+  display: flex;
+  flex-direction: column;/*竖着排*/
+  width: 100%;
+  height: 100%;
+}
+
+.scene-editor {
+  flex: 1;/*占满剩余空间*/
+  height: 200rpx;
+  background-color: #abd;
+}
+
+.scene-template {
+  background-color: #456;
+  margin-top: 20rpx;
+  flex: 0 0 180rpx;/*不放大不缩小保持180rpx*/
+}
+
+.scene-download {
+  margin: 20rpx;
+  flex: 0 0 90rpx;/*不放大不缩小保持90rpx*/
+}

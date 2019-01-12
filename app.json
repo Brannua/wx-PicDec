@@ -1,0 +1,12 @@
+{
+  "pages": [
+    "pages/scene/scene",
+    "pages/index/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#234",
+    "navigationBarTitleText": "趣味图",
+    "navigationBarTextStyle": "white"
+  }
+}

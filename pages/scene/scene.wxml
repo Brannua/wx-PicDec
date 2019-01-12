@@ -1,0 +1,6 @@
+<!--pages/scene/scene.wxml-->
+<view class='scene'>
+  <view class='scene-editor'></view>
+  <view class='scene-template'></view>
+  <button class='scene-download' type='primary'>保存照片</button>
+</view>
