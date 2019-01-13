@@ -1,8 +1,15 @@
 <!--pages/scene/scene.wxml-->
 <view class='scene'>
-  <view class='scene-editor'>
-    <canvas class='scene-editor-main' canvas-id='scene'></canvas><!-- 购买画纸画笔 -->
+  <view class='scene-editor' id="scene-editor">
+    <canvas class='scene-editor-main' canvas-id='scene'></canvas>
+    <!-- 购买画纸画笔 -->
   </view>
-  <view class='scene-template'></view>
+  <swiper class='scene-template' display-multiple-items="{{3}}" circular="{{true}}" previous-margin="10rpx" next-margin="10rpx">
+    <swiper-item wx:for="{{templates}}" wx:key="cover">
+      <view class='scene-item {{currentNewScene === index ? "scene-item-active" : ""}}' bindtap='onTapScene' data-index="{{index}}">
+        <image class="scene-item-cover" src="{{item.cover}}" mode="aspectFit"></image>
+      </view>
+    </swiper-item>
+  </swiper>
   <button class='scene-download' type='primary'>保存照片</button>
 </view>

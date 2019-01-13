@@ -18,6 +18,7 @@ page {
 }
 
 .scene-template {
+  height: 180rpx;
   background-color: #456;
   margin-top: 20rpx;
   flex: 0 0 180rpx;/*不放大不缩小保持180rpx*/
@@ -32,4 +33,20 @@ page {
 .scene-editor-main {
   width: 100%;
   height: 100%;
+}
+
+/* swiper-item的样式 */
+.scene-item {
+  height: 180rpx;
+  margin: 0 10rpx;
+}
+
+.scene-item-cover {
+  height: 100%;
+  width: 100%;
+}
+
+/* 给选中的图片模板加样式 */
+.scene-item-active {
+  outline: #f00 dotted thick;
 }
