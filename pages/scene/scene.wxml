@@ -1,7 +1,7 @@
 <!--pages/scene/scene.wxml-->
 <view class='scene'>
   <view class='scene-editor' id="scene-editor">
-    <canvas class='scene-editor-main' canvas-id='scene'></canvas>
+    <canvas style="width: {{canvasWidth}}px; height: {{canvasHeight}}px" class='scene-editor-main' canvas-id='scene'></canvas>
     <!-- 购买画纸画笔 -->
   </view>
   <swiper class='scene-template' display-multiple-items="{{3}}" circular="{{true}}" previous-margin="10rpx" next-margin="10rpx">

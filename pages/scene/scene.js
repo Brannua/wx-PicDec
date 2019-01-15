@@ -3,7 +3,8 @@
 var app = getApp();
 
 var cfg = {
-  photo: {}
+  photo: {},
+  template: {}
 }; //用来保存查询所得的元素数据，方便之后取用
 
 Page({
@@ -24,18 +25,15 @@ Page({
     }, {
       cover: "../../image/6.jpg"
     }],
-
-    currentNewScene: 0
+    currentNewScene: 0,
+    canvasWidth: 0,
+    canvasHeight: 0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    // var uploadData = app.globalData.uploadData;
-
-    // this.drawNewScene(this.data.currentNewScene);
-
     this.setCanvasSize(); // 设置画布大小
   },
 
@@ -50,18 +48,37 @@ Page({
       wx.getImageInfo({
         src: that.data.templates[0].cover,
         success(res) {
-          console.log(res);
+          // console.log(res);
           //将图片的路径宽高等重要信息保存下来
           cfg.photo.path = res.path;
-          cfg.photo.originalHeight = res.height;
-          cfg.photo.originalWidth = res.width;
+          var originalHeight = cfg.photo.originalHeight = res.height;
+          var originalWidth = cfg.photo.originalWidth = res.width;
+          // 计算画布的宽度和高度
+          if ( //图片瘦高
+            originalHeight / originalWidth > cfg.canvasWrapper.height / cfg.canvasWrapper.width
+          ) {
+            cfg.canvasHeight = cfg.canvasWrapper.height;
+            cfg.canvasWidth = originalWidth * cfg.canvasHeight / originalHeight;
+          } else { //图片胖宽或者正好和容器成比例
+            cfg.canvasWidth = cfg.canvasWrapper.width;
+            cfg.canvasHeight = originalHeight * cfg.canvasWidth / originalWidth;
+          }
+
+          that.setData({
+            canvasWidth: cfg.canvasWidth,
+            canvasHeight: cfg.canvasHeight
+          });
+
+          that.drawNewScene(that.data.currentNewScene);
+
         }
       });
     }).exec();
+    // console.log(cfg);
   },
 
   onTapScene: function(event) {
-    console.log(event);
+    // console.log(event);
     var index = event.currentTarget.dataset.index;
     // 保存住当前所点击的图片的index
     this.setData({
@@ -83,20 +100,17 @@ Page({
     var templates = this.data.templates; //将数组取出来
 
     const ctx = wx.createCanvasContext("scene"); //取画布
-    ctx.drawImage(uploadData.tempFilePaths[0], 0, 0);
+    ctx.drawImage(uploadData.tempFilePaths[0], 0, 0, cfg.canvasWidth, cfg.canvasHeight);
+
+    // 先知道模板图片的原始宽高再进行等比例缩放
+    wx.getImageInfo({
+      src: templates[index].cover,
+      success(res) {
+        var width = cfg.template.originalWidth = res.width;
+        var height = cfg.template.originalHeight = res.height;
+      }
+    });
     ctx.drawImage(templates[index].cover, 0, 0, 100, 60);
     ctx.draw();
   }
-})
-
-
-
-// if (
-//   photo.originalHeight / photo.originalWidth > canvasWrapper.height / canvasWrapper.width
-// ) {
-//   canvasHeight = canvasWrapper.height;
-//   canvasWidth = photo.originalWidth * canvasHeight / photo.originalHeight;
-// } else {
-//   canvasWidth = canvasWrapper.width;
-//   canvasHeight = photo.originalHeight * canvasWidth / photo.originalWidth;
-// }
+});
