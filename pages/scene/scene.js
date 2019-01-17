@@ -1,5 +1,3 @@
-// pages/scene/scene.js
-
 var app = getApp();
 
 var cfg = {
@@ -36,6 +34,10 @@ Page({
    */
   onLoad: function(options) {
     this.setCanvasSize(); // 设置画布大小
+
+    // cfg中保存住模板图片左上角距离xy轴的距离
+    cfg.template.x = 0;
+    cfg.template.y = 0;
   },
 
   // 设置画布大小
@@ -89,6 +91,10 @@ Page({
       success(res) {
         var width = cfg.template.originalWidth = res.width;
         var height = cfg.template.originalHeight = res.height;
+
+        // 记录下来现在模板图片画的是哪一张
+        cfg.template.cover = templates[index].cover;
+        
         // 获取模板图片的初始位置
         var x = cfg.template.x;
         var y = cfg.template.y;
@@ -111,17 +117,12 @@ Page({
       currentNewScene: index,
     });
 
-    // cfg中保存住模板图片左上角距离xy轴的距离
-    cfg.template.x = 0;
-    cfg.template.y = 0;
-
     // 将点击选中的图片放上去
     this.drawNewScene(index);
   },
 
   // 拖动模板图片
-  onTouchStart: 　 function(event) {
-    console.log(event);
+  onTouchStart: function(event) {
     var touchPoint = event.touches[0];
     // 获取模板图片的初始位置
     var x = cfg.template.x;
@@ -136,12 +137,26 @@ Page({
   onTouchMove: function(event) {
 
     var touchPoint = event.touches[0];
-    console.log(touchPoint);
 
     // 计算出拖动模板图片结束后模板图片左上角的位置
     // cfg.offsetX = touchPoint.clientX - x
     // cfg.offsetY = touchPoint.clientY - y
-    x = cfg.offsetX - touchPoint.clientX;
-    y = cfg.offsetY - touchPoint.clientY;
+    var x = touchPoint.clientX - cfg.offsetX;
+    var y = touchPoint.clientY - cfg.offsetY;
+    //获取模板图片的原始宽高方便下面进行等比例缩放
+    var width = cfg.template.originalWidth;
+    var height = cfg.template.originalHeight;
+    //算好之后开始画
+
+    var uploadData = app.globalData.uploadData; //获取上传的背景图片
+    const ctx = wx.createCanvasContext("scene"); //取画布
+
+    // 记录住图片被拖动后的位置(实时更新模板图片的位置)
+    cfg.template.x = x;
+    cfg.template.y = y;
+
+    ctx.drawImage(uploadData.tempFilePaths[0], 0, 0, cfg.canvasWidth, cfg.canvasHeight);
+    ctx.drawImage(cfg.template.cover, x, y, 160, 160 * height / width);
+    ctx.draw();
   }
 });
