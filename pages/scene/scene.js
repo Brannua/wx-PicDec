@@ -3,8 +3,8 @@
 var app = getApp();
 
 var cfg = {
-  photo: {},
-  template: {}
+  photo: {}, //用于保存背景图片的信息
+  template: {} //用于保存模板图片的信息
 }; //用来保存查询所得的元素数据，方便之后取用
 
 Page({
@@ -12,6 +12,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    //六个模板图片
     templates: [{
       cover: "../../image/1.jpg"
     }, {
@@ -48,7 +49,6 @@ Page({
       wx.getImageInfo({
         src: that.data.templates[0].cover,
         success(res) {
-          // console.log(res);
           //将图片的路径宽高等重要信息保存下来
           cfg.photo.path = res.path;
           var originalHeight = cfg.photo.originalHeight = res.height;
@@ -63,44 +63,25 @@ Page({
             cfg.canvasWidth = cfg.canvasWrapper.width;
             cfg.canvasHeight = originalHeight * cfg.canvasWidth / originalWidth;
           }
-
+          //保存住画布的宽高
           that.setData({
             canvasWidth: cfg.canvasWidth,
             canvasHeight: cfg.canvasHeight
           });
 
-          that.drawNewScene(that.data.currentNewScene);
-
+          that.drawNewScene(that.data.currentNewScene); //有画布了再进行接下来画的操作
         }
       });
     }).exec();
-    // console.log(cfg);
   },
 
-  onTapScene: function(event) {
-    // console.log(event);
-    var index = event.currentTarget.dataset.index;
-    // 保存住当前所点击的图片的index
-    this.setData({
-      currentNewScene: index,
-    });
-    // 将点击选中的图片放上去
-    this.drawNewScene(index);
-  },
-
+  // 画的操作
   drawNewScene: function(index) { //index是形式参数
-    var uploadData = {
-      "errMsg": "chooseImage:ok",
-      "tempFilePaths": ["https://isujin.com/wp-content/themes/Diaspora/timthumb/timthumb.php?src=https://isujin.com/wp-content/uploads/2018/11/wallhaven-672007-1.png"],
-      "tempFiles": [{
-        "path": "https://isujin.com/wp-content/themes/Diaspora/timthumb/timthumb.php?src=https://isujin.com/wp-content/uploads/2018/11/wallhaven-672007-1.png",
-        "size": 81478
-      }]
-    };
-    var templates = this.data.templates; //将数组取出来
+    var uploadData = app.globalData.uploadData; //获取上传的背景图片
+    var templates = this.data.templates; //将模板图片对象数组取出来
 
     const ctx = wx.createCanvasContext("scene"); //取画布
-    ctx.drawImage(uploadData.tempFilePaths[0], 0, 0, cfg.canvasWidth, cfg.canvasHeight);
+
 
     // 先知道模板图片的原始宽高再进行等比例缩放
     wx.getImageInfo({
@@ -108,9 +89,59 @@ Page({
       success(res) {
         var width = cfg.template.originalWidth = res.width;
         var height = cfg.template.originalHeight = res.height;
+        // 获取模板图片的初始位置
+        var x = cfg.template.x;
+        var y = cfg.template.y;
+
+        // width \ heigt = 100 \ ?  等比例缩放模板图片
+
+        ctx.drawImage(uploadData.tempFilePaths[0], x, y, cfg.canvasWidth, cfg.canvasHeight);
+        ctx.drawImage(templates[index].cover, 0, 0, 160, 160 * height / width);
+        ctx.draw();
       }
     });
-    ctx.drawImage(templates[index].cover, 0, 0, 100, 60);
-    ctx.draw();
+  },
+
+  // 点击哪一张模板图片就画上哪一张模板图片
+  onTapScene: function(event) {
+    // 获取并保存住当前所点击的图片的index
+    var index = event.currentTarget.dataset.index;
+
+    this.setData({
+      currentNewScene: index,
+    });
+
+    // cfg中保存住模板图片左上角距离xy轴的距离
+    cfg.template.x = 0;
+    cfg.template.y = 0;
+
+    // 将点击选中的图片放上去
+    this.drawNewScene(index);
+  },
+
+  // 拖动模板图片
+  onTouchStart: 　 function(event) {
+    console.log(event);
+    var touchPoint = event.touches[0];
+    // 获取模板图片的初始位置
+    var x = cfg.template.x;
+    var y = cfg.template.y;
+
+    // 计算得到触摸点的偏移值并保存到cfg中
+    cfg.offsetX = touchPoint.clientX - x;
+    cfg.offsetY = touchPoint.clientY - y;
+  },
+
+  // 模板图片的拖动事件
+  onTouchMove: function(event) {
+
+    var touchPoint = event.touches[0];
+    console.log(touchPoint);
+
+    // 计算出拖动模板图片结束后模板图片左上角的位置
+    // cfg.offsetX = touchPoint.clientX - x
+    // cfg.offsetY = touchPoint.clientY - y
+    x = cfg.offsetX - touchPoint.clientX;
+    y = cfg.offsetY - touchPoint.clientY;
   }
 });
