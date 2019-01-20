@@ -11,10 +11,10 @@
     />
     <!-- 购买画纸画笔 -->
   </view>
-  <swiper class='scene-template' display-multiple-items="{{3}}" circular="{{true}}" previous-margin="10rpx" next-margin="10rpx">
+  <swiper class='scene-template' indicator-dots="true" autoplay="true" display-multiple-items="{{3}}" circular="{{true}}" previous-margin="10rpx" next-margin="10rpx">
     <swiper-item wx:for="{{templates}}" wx:key="cover">
       <view class='scene-item {{currentNewScene === index ? "scene-item-active" : ""}}' bindtap='onTapScene' data-index="{{index}}">
-        <image class="scene-item-cover" src="{{item.cover}}" mode="aspectFit"></image>
+        <image class="scene-item-cover" hover-class="aria-role" src="{{item.cover}}" mode="aspectFit"></image>
       </view>
     </swiper-item>
   </swiper>

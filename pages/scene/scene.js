@@ -89,8 +89,8 @@ Page({
           }
           // 保存住画布的宽高
           that.setData({
-            canvasWidth: cfg.canvasWidth,
-            canvasHeight: cfg.canvasHeight,
+            canvasWidth: cfg.canvasWidth*0.96,
+            canvasHeight: cfg.canvasHeight*0.96,
           });
           //有画布了再进行接下来画的操作
           that.drawNewScene(that.data.currentNewScene);

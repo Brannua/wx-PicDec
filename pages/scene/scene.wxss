@@ -1,4 +1,3 @@
-/* pages/scene/scene.wxss */
 page {
   width: 100%;
   height: 100%;
@@ -6,41 +5,36 @@ page {
 
 .scene {
   display: flex;
-  flex-direction: column;/*竖着排*/
+  flex-direction: column; /*竖着排*/
   width: 100%;
   height: 100%;
+  background-color: rgb(30, 30, 30);
 }
 
 .scene-editor {
-  flex: 1;/*占满剩余空间*/
-  height: 200rpx;
+  flex: 1; /*占满剩余空间*/
   display: flex;
-  justify-content: center;/*水平居中*/
-  align-items: center;/*垂直居中*/
+  justify-content: center; /*水平居中*/
+  align-items: center; /*垂直居中*/
 }
 
 .scene-template {
   height: 180rpx;
-  /* background-color: #456; */
-  margin-top: 20rpx;
-  flex: 0 0 180rpx;/*不放大不缩小保持180rpx*/
+  margin-bottom: 20rpx;
+  flex: 0 0 180rpx; /*不放大不缩小保持180rpx*/
 }
 
 .scene-download {
   margin: 20rpx;
-  flex: 0 0 90rpx;/*不放大不缩小保持90rpx*/
-}
-
-/* canvas的样式 */
-.scene-editor-main {
-  width: 100%;
-  height: 100%;
+  flex: 0 0 90rpx; /*不放大不缩小保持90rpx*/
+  margin-bottom: 30rpx;
 }
 
 /* swiper-item的样式 */
+
 .scene-item {
   height: 180rpx;
-  margin: 0 10rpx;
+  margin: 0px 10rpx;
 }
 
 .scene-item-cover {
@@ -49,6 +43,8 @@ page {
 }
 
 /* 给选中的图片模板加样式 */
+
 .scene-item-active {
-  /* outline: #f00 dotted thick; */
+  background-color: rgba(36, 36, 36, 0.1);
+  border-radius: 6%;
 }
