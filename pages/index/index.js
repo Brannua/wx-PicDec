@@ -1,6 +1,9 @@
-var app = getApp();// 获取app实例
+var app = getApp(); // 获取app实例
 
 Page({
+  data: {
+    bgSrc: "https://pj-l.gitee.io/lpj/2018/image/bg.png"
+  },
   uploadPhoto: function() {
     wx.chooseImage({
       count: 1,

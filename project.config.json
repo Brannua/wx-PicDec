@@ -12,9 +12,9 @@
 		"autoAudits": false
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.4.4",
-	"appid": "wxc96e9c58a2f19a0d",
-	"projectname": "funnyPicture",
+	"libVersion": "2.5.0",
+	"appid": "wx2ee75b6735bc7e8f",
+	"projectname": "Pic%E8%A3%85%E6%89%AE",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},

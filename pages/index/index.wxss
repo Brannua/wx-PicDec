@@ -6,12 +6,13 @@ page {
 
 .page-bg {
   width: 100%;
+  height: 100%;
 }
 
 .page-upload {
   position: fixed;
-  bottom: 200rpx;
   width: 460rpx;
+  bottom: 200rpx;
   left: 50%;
   transform: translateX(-50%);
   background-color: rgba(0, 128, 0, .5);

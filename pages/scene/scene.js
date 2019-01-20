@@ -1,4 +1,4 @@
-var app = getApp();//可以获取到里面保存的上传的背景图片src
+var app = getApp(); //可以获取到里面保存的上传的背景图片src
 
 var cfg = {
   photo: {}, //用于保存背景图片的信息
@@ -19,29 +19,29 @@ Page({
   data: {
     //模板图片们
     templates: [{
-      cover: "../../image/1.jpg"
+      cover: "https://pj-l.gitee.io/lpj/2018/image/1.jpg"
     }, {
-      cover: "../../image/2.jpg"
+      cover: "https://pj-l.gitee.io/lpj/2018/image/2.jpg"
     }, {
-      cover: "../../image/3.jpg"
+      cover: "https://pj-l.gitee.io/lpj/2018/image/3.jpg"
     }, {
-      cover: "../../image/4.jpg"
+      cover: "https://pj-l.gitee.io/lpj/2018/image/4.jpg"
     }, {
-      cover: "../../image/5.jpg"
+      cover: "https://pj-l.gitee.io/lpj/2018/image/5.jpg"
     }, {
-      cover: "../../image/6.jpg"
+      cover: "https://pj-l.gitee.io/lpj/2018/image/6.jpg"
     }, {
-      cover: "../../image/7.jpg"
+      cover: "https://pj-l.gitee.io/lpj/2018/image/7.jpg"
     }, {
-      cover: "../../image/8.jpg"
+      cover: "https://pj-l.gitee.io/lpj/2018/image/8.jpg"
     }, {
-      cover: "../../image/9.jpg"
+      cover: "https://pj-l.gitee.io/lpj/2018/image/9.jpg"
     }, {
-      cover: "../../image/10.jpg"
+      cover: "https://pj-l.gitee.io/lpj/2018/image/10.jpg"
     }, {
-      cover: "../../image/11.jpg"
+      cover: "https://pj-l.gitee.io/lpj/2018/image/11.jpg"
     }, {
-      cover: "../../image/12.jpg"
+      cover: "https://pj-l.gitee.io/lpj/2018/image/12.jpg"
     }],
     // 刚上传图片的时候模板图片默认为第一张
     currentNewScene: 0,
@@ -53,7 +53,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     this.setCanvasSize(); // 设置画布大小
     // cfg中保存住模板图片左上角距离xy轴的距离
     cfg.template.x = 0;
@@ -61,10 +61,10 @@ Page({
   },
 
   // 设置画布大小
-  setCanvasSize: function () {
+  setCanvasSize: function() {
     var that = this; // 用于保存this指向，方便内部调用api时使用
     // 先要知道容器的高度和宽度
-    wx.createSelectorQuery().select('#scene-editor').boundingClientRect(function (canvasWrapper) {
+    wx.createSelectorQuery().select('#scene-editor').boundingClientRect(function(canvasWrapper) {
       // 将查询到的容器宽高保存到cfg中方便之后取用
       cfg.canvasWrapper = canvasWrapper;
       //获取上传的背景图片src
@@ -89,8 +89,8 @@ Page({
           }
           // 保存住画布的宽高
           that.setData({
-            canvasWidth: cfg.canvasWidth*0.96,
-            canvasHeight: cfg.canvasHeight*0.96,
+            canvasWidth: cfg.canvasWidth * 0.96,
+            canvasHeight: cfg.canvasHeight * 0.96,
           });
           //有画布了再进行接下来画的操作
           that.drawNewScene(that.data.currentNewScene);
@@ -100,7 +100,7 @@ Page({
   },
 
   // 画的操作
-  drawNewScene: function (index) { //index是形式参数
+  drawNewScene: function(index) { //index是形式参数
     var uploadData = app.globalData.uploadData; //获取上传的背景图片
     var templates = this.data.templates; //将模板图片对象数组取出来
 
@@ -129,7 +129,7 @@ Page({
   },
 
   // 点击哪一张模板图片就画上哪一张模板图片
-  onTapScene: function (event) {
+  onTapScene: function(event) {
     // 获取并保存住当前所点击的图片的index
     var index = event.currentTarget.dataset.index;
     this.setData({
@@ -140,17 +140,17 @@ Page({
   },
 
   // 开始触摸
-  onTouchStart: function (event) {
+  onTouchStart: function(event) {
     // 先判断是移动操作还是缩放操作
-    if (event.touches.length > 1) {//开始缩放
+    if (event.touches.length > 1) { //开始缩放
       this.startZoom(event);
-    } else {// 开始移动
+    } else { // 开始移动
       this.startMove(event);
     }
   },
 
   // 模板图片开始缩放
-  startZoom: function (event) {
+  startZoom: function(event) {
     // 先计算两缩放手指之间的初始距离并保存到cfg中
     var xMove = event.touches[1].clientX - event.touches[0].clientX;
     var yMove = event.touches[1].clientY - event.touches[0].clientY;
@@ -158,7 +158,7 @@ Page({
   },
 
   // 移动开始事件
-  startMove: function (event) {
+  startMove: function(event) {
     var touchPoint = event.touches[0];
     // 获取模板图片的初始位置
     var x = cfg.template.x;
@@ -169,7 +169,7 @@ Page({
   },
 
   // 拖动图片的方法
-  move: function (event) {
+  move: function(event) {
     var touchPoint = event.touches[0];
     // 计算出拖动模板图片结束后模板图片左上角的位置
     var x = touchPoint.clientX - cfg.offsetX;
@@ -177,7 +177,7 @@ Page({
     // 记录住图片被拖动后的位置(实时更新模板图片的位置)
     cfg.template.x = x;
     cfg.template.y = y;
-    
+
     // 获取模板图片的原始宽高方便进行等比例缩放
     var width = cfg.template.originalWidth;
     var height = cfg.template.originalHeight;
@@ -195,7 +195,7 @@ Page({
   },
 
   // 模板图片缩放
-  zoom: function (event) {
+  zoom: function(event) {
     // 先计算当前的手指之间的距离(勾股定理算距离)
     var xMove = event.touches[1].clientX - event.touches[0].clientX;
     var yMove = event.touches[1].clientY - event.touches[0].clientY;
@@ -224,7 +224,7 @@ Page({
   },
 
   // 移动中
-  onTouchMove: function (event) {
+  onTouchMove: function(event) {
     // 先判断是移动操作还是缩放操作
     if (event.touches.length > 1) {
       // 缩放中
@@ -243,13 +243,13 @@ Page({
   },
 
   //缩放结束的一瞬间触发的函数，用来解决模板图片瞬间跳转的bug 
-  onTouchEnd: function () {
+  onTouchEnd: function() {
     var date = new Date();
     cfg.endTime = date.getTime();
   },
 
   // 保存图片
-  downloadPic: function () {
+  downloadPic: function() {
     var canvasWidth = cfg.canvasWidth;
     var canvasHeight = cfg.canvasHeight;
 
