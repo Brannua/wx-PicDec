@@ -7,6 +7,7 @@
       canvas-id='scene'
       catchtouchstart='onTouchStart'
       catchtouchmove='onTouchMove'
+      catchtouchend='onTouchEnd'
     />
     <!-- 购买画纸画笔 -->
   </view>
@@ -17,5 +18,5 @@
       </view>
     </swiper-item>
   </swiper>
-  <button class='scene-download' type='primary'>保存照片</button>
+  <button class='scene-download' type='primary' bindtap='downloadPic'>保存照片</button>
 </view>

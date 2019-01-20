@@ -21,7 +21,7 @@ page {
 
 .scene-template {
   height: 180rpx;
-  background-color: #456;
+  /* background-color: #456; */
   margin-top: 20rpx;
   flex: 0 0 180rpx;/*不放大不缩小保持180rpx*/
 }
@@ -50,5 +50,5 @@ page {
 
 /* 给选中的图片模板加样式 */
 .scene-item-active {
-  outline: #f00 dotted thick;
+  /* outline: #f00 dotted thick; */
 }
