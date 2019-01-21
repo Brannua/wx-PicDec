@@ -1,2 +1,2 @@
 # wx-funnyPicture
-微信小程序-开心拼图
+微信小程序-Pic装扮
