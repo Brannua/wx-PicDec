@@ -19,29 +19,29 @@ Page({
   data: {
     //模板图片们
     templates: [{
-      cover: "https://pj-l.gitee.io/lpj/2018/image/1.jpg"
+      cover: "../../img/1.jpg"
     }, {
-      cover: "https://pj-l.gitee.io/lpj/2018/image/2.jpg"
+        cover: "../../img/2.jpg"
     }, {
-      cover: "https://pj-l.gitee.io/lpj/2018/image/3.jpg"
+        cover: "../../img/3.jpg"
     }, {
-      cover: "https://pj-l.gitee.io/lpj/2018/image/4.jpg"
+        cover: "../../img/4.jpg"
     }, {
-      cover: "https://pj-l.gitee.io/lpj/2018/image/5.jpg"
+        cover: "../../img/5.jpg"
     }, {
-      cover: "https://pj-l.gitee.io/lpj/2018/image/6.jpg"
+        cover: "../../img/6.jpg"
     }, {
-      cover: "https://pj-l.gitee.io/lpj/2018/image/7.jpg"
+        cover: "../../img/7.jpg"
     }, {
-      cover: "https://pj-l.gitee.io/lpj/2018/image/8.jpg"
+        cover: "../../img/8.jpg"
     }, {
-      cover: "https://pj-l.gitee.io/lpj/2018/image/9.jpg"
+        cover: "../../img/9.jpg"
     }, {
-      cover: "https://pj-l.gitee.io/lpj/2018/image/10.jpg"
+        cover: "../../img/10.jpg"
     }, {
-      cover: "https://pj-l.gitee.io/lpj/2018/image/11.jpg"
+        cover: "../../img/11.jpg"
     }, {
-      cover: "https://pj-l.gitee.io/lpj/2018/image/12.jpg"
+        cover: "../../img/12.jpg"
     }],
     // 刚上传图片的时候模板图片默认为第一张
     currentNewScene: 0,
